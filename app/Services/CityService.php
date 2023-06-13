@@ -56,14 +56,14 @@ class CityService {
 
     public function cityDetails($city_id)
     {
-        $data = $this->redis::get('city_details');
+        $data = $this->redis::get('city_details_' . $city_id);
 
         if (!$data) {
             $response = file_get_contents($this->ibge_api_link . $city_id);
             $data = json_decode($response);
 
-            $this->redis::set('city_details', $response);
-            $this->redis::expire('city_details', 1800);
+            $this->redis::set('city_details_' . $city_id, $response);
+            $this->redis::expire('city_details_' . $city_id, 1800);
 
             return $data;
         }
