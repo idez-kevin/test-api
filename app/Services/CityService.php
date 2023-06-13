@@ -59,7 +59,11 @@ class CityService {
         $data = $this->redis::get('city_details_' . $city_id);
 
         if (!$data) {
-            $response = file_get_contents($this->ibge_api_link . $city_id);
+            try{
+                $response = file_get_contents($this->ibge_api_link . $city_id . '?view=nivelado');
+            } catch (Exception $e){
+                return 'Não foi possível conectar com a API IBGE!';
+            }
             $data = json_decode($response);
 
             $this->redis::set('city_details_' . $city_id, $response);
