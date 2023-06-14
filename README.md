@@ -9,7 +9,7 @@
 ## Projeto em produção:
 [Acesse aqui](https://idez.caprino.top/)
 
-## Endpoinst:
+## Endpoints:
 
 	
 
